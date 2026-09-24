@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>明心沟通 · 一对一咨询服务</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Noto Sans SC',sans-serif;
+  background:#fdf6f0;
+  color:#4a3a35;
+  line-height:1.8;
+  overflow-x:hidden;
+}
+
+/* ===== PASSWORD LOCK ===== */
+.lock-screen{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  background:#fdf6f0;
+  padding:24px;
+}
+.lock-screen.unlocked{display:none}
+.lock-card{
+  text-align:center;
+  max-width:360px;
+  width:100%;
+}
+.lock-card .lock-icon{
+  font-size:48px;opacity:.3;margin-bottom:12px;
+}
+.lock-card h2{
+  font-family:'Noto Serif SC',serif;
+  font-size:22px;color:#6a4a42;font-weight:600;
+  letter-spacing:2px;margin-bottom:4px;
+}
+.lock-card .lock-sub{
+  font-size:13px;color:rgba(150,120,110,.4);
+  margin-bottom:24px;font-weight:300;
+}
+.lock-card input{
+  width:100%;padding:12px 16px;
+  border:1.5px solid rgba(200,160,145,.15);
+  border-radius:12px;font-size:15px;
+  outline:none;transition:border .3s;
+  background:rgba(255,255,255,.5);
+  font-family:'Noto Sans SC',sans-serif;
+  text-align:center;letter-spacing:4px;
+  margin-bottom:12px;color:#4a3a35;
+}
+.lock-card input:focus{border-color:#d48a7a}
+.lock-card button{
+  width:100%;padding:12px;
+  background:linear-gradient(135deg,#d48a7a,#c07a6a);
+  color:#fff;border:none;border-radius:12px;
+  font-size:15px;cursor:pointer;
+  transition:all .3s;letter-spacing:2px;
+  font-family:'Noto Sans SC',sans-serif;
+}
+.lock-card button:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(200,130,110,.2)}
+.lock-card .lock-error{
+  font-size:13px;color:#c07a6a;margin-top:8px;min-height:20px;
+  font-weight:300;
+}
+.lock-card .lock-hint{
+  font-size:12px;color:rgba(150,120,110,.2);margin-top:16px;
+  font-weight:300;
+}
+
+/* ===== SOFT GLOW BG ===== */
+.glow-bg{
+  position:fixed;inset:0;z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.glow-bg .orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+  animation:orbFloat 16s ease-in-out infinite;
+}
+.glow-bg .orb:nth-child(1){
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(255,200,180,.25),rgba(255,180,160,.1));
+  top:-10%;left:0;
+  animation-delay:0s;
+}
+.glow-bg .orb:nth-child(2){
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(255,220,200,.2),rgba(255,200,180,.08));
+  bottom:-5%;right:-5%;
+  animation-delay:-5s;
+}
+.glow-bg .orb:nth-child(3){
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(255,210,190,.18),rgba(255,190,170,.06));
+  top:40%;left:60%;
+  animation-delay:-10s;
+}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(20px,-15px) scale(1.05)}
+  66%{transform:translate(-15px,20px) scale(.97)}
+}
+
+/* ===== CONTENT ===== */
+.content{position:relative;z-index:1}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:80px 24px 100px;
+  position:relative;
+}
+.hero-embrace{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at 50% 40%, rgba(255,220,200,.12) 0%, transparent 60%);
+  pointer-events:none;
+}
+.brand-name{
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(40px,7vw,72px);
+  font-weight:700;
+  color:#d48a7a;
+  letter-spacing:6px;
+  line-height:1.2;
+  margin-bottom:4px;
+}
+.brand-sub{
+  font-size:clamp(13px,1.5vw,17px);
+  color:rgba(180,130,120,.3);
+  letter-spacing:12px;
+  font-weight:300;
+  margin-bottom:36px;
+}
+.hero-title{
+  font-size:clamp(18px,2.5vw,28px);
+  font-weight:400;
+  color:#6a4a42;
+  line-height:1.6;
+  margin-bottom:10px;
+}
+.hero-title em{
+  font-style:normal;
+  color:#d48a7a;
+  font-weight:500;
+}
+.hero-desc{
+  font-size:clamp(14px,1.6vw,16px);
+  color:rgba(130,100,90,.45);
+  max-width:480px;
+  margin:0 auto 28px;
+  font-weight:300;
+  line-height:2;
+}
+.hero-tags{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+}
+.hero-tags span{
+  padding:6px 20px;
+  border:1px solid rgba(200,160,145,.1);
+  border-radius:20px;
+  font-size:13px;
+  color:rgba(150,120,110,.45);
+  letter-spacing:2px;
+  background:rgba(255,255,255,.35);
+  transition:all .4s;
+}
+.hero-tags span:hover{
+  border-color:rgba(200,160,145,.25);
+  color:#6a4a42;
+  background:rgba(255,255,255,.5);
+}
+.scroll-down{
+  position:absolute;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  color:rgba(200,160,145,.2);
+  font-size:12px;
+  letter-spacing:3px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  animation:bounce 2.5s ease-in-out infinite;
+}
+.scroll-down .arrow{font-size:20px;line-height:1}
+@keyframes bounce{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(8px)}
+}
+
+/* ===== SECTION ===== */
+.section{
+  max-width:860px;
+  margin:0 auto;
+  padding:72px 24px;
+}
+.section-header{
+  text-align:center;
+  margin-bottom:36px;
+}
+.section-header .icon{font-size:20px;margin-bottom:6px;opacity:.5}
+.section-header h2{
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(22px,3vw,30px);
+  color:#6a4a42;
+  font-weight:600;
+  letter-spacing:2px;
+}
+.section-header .line{
+  width:40px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(200,160,145,.25),transparent);
+  margin:12px auto 0;
+  border-radius:1px;
+}
+.section-header p{
+  font-size:14px;
+  color:rgba(130,100,90,.4);
+  margin-top:10px;
+  font-weight:300;
+}
+
+/* ===== PRICING ===== */
+.price-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+}
+.price-card{
+  background:rgba(255,255,255,.45);
+  border:1px solid rgba(200,160,145,.08);
+  border-radius:16px;
+  padding:28px 16px 22px;
+  text-align:center;
+  transition:all .4s ease;
+}
+.price-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(200,160,145,.18);
+  background:rgba(255,255,255,.6);
+  box-shadow:0 6px 20px rgba(200,160,145,.06);
+}
+.price-name{
+  font-size:13px;
+  color:rgba(150,120,110,.45);
+  letter-spacing:3px;
+  margin-bottom:10px;
+  font-weight:300;
+}
+.price-amount{
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(30px,3.4vw,40px);
+  font-weight:700;
+  color:#6a4a42;
+  line-height:1;
+  margin-bottom:6px;
+}
+.price-amount .unit{
+  font-size:14px;
+  font-weight:400;
+  color:rgba(150,120,110,.3);
+}
+.price-desc{
+  font-size:13px;
+  color:rgba(130,100,90,.38);
+  font-weight:300;
+}
+
+/* ===== RULES ===== */
+.rules-wrap{
+  background:rgba(255,255,255,.3);
+  border:1px solid rgba(200,160,145,.06);
+  border-radius:16px;
+  padding:32px 28px;
+}
+.rules-intro{
+  font-size:14px;
+  color:rgba(130,100,90,.5);
+  line-height:2;
+  padding-bottom:16px;
+  margin-bottom:2px;
+  border-bottom:1px solid rgba(200,160,145,.06);
+  font-weight:300;
+}
+.rules-list{list-style:none;counter-reset:rule}
+.rules-list li{
+  counter-increment:rule;
+  padding:12px 0 12px 38px;
+  position:relative;
+  border-bottom:1px solid rgba(200,160,145,.04);
+  font-size:clamp(13px,1.4vw,14.5px);
+  color:rgba(100,80,70,.7);
+  line-height:2;
+}
+.rules-list li:last-child{border-bottom:none}
+.rules-list li::before{
+  content:counter(rule);
+  position:absolute;
+  left:0;top:12px;
+  width:24px;height:24px;
+  border-radius:50%;
+  border:1px solid rgba(200,160,145,.1);
+  color:rgba(180,140,130,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:400;
+}
+.rules-list li strong{color:#d48a7a;font-weight:600}
+
+/* ===== RESPECT ===== */
+.respect-section{
+  max-width:660px;
+  margin:0 auto;
+  padding:60px 24px 72px;
+}
+.respect-card{
+  background:rgba(255,255,255,.35);
+  border-radius:24px;
+  padding:48px 36px;
+  text-align:center;
+  position:relative;
+}
+.respect-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:24px;
+  border:1.5px solid rgba(200,160,145,.1);
+  pointer-events:none;
+}
+.respect-card .quote-mark{
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(40px,6vw,64px);
+  color:rgba(200,160,145,.08);
+  line-height:1;
+  position:absolute;
+}
+.respect-card .quote-mark.top{top:12px;left:20px}
+.respect-card .quote-mark.bottom{bottom:0;right:20px}
+.respect-card p{
+  font-size:clamp(15px,2vw,19px);
+  color:#5a3e38;
+  line-height:2.3;
+  font-weight:400;
+}
+.respect-card p strong{
+  color:#d48a7a;
+  font-weight:600;
+}
+.respect-card .sig{
+  margin-top:20px;
+  font-size:14px;
+  color:rgba(180,140,130,.3);
+  letter-spacing:2px;
+}
+
+/* ===== PROCESS ===== */
+.process-steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px;
+}
+.process-step{
+  text-align:center;
+  padding:24px 12px;
+}
+.step-num{
+  width:40px;height:40px;
+  border-radius:50%;
+  border:1px solid rgba(200,160,145,.12);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;
+  font-size:16px;
+  font-weight:500;
+  color:rgba(180,140,130,.4);
+}
+.process-step h3{
+  font-size:15px;
+  color:#5a3e38;
+  margin-bottom:4px;
+  font-weight:500;
+}
+.process-step p{
+  font-size:13px;
+  color:rgba(130,100,90,.4);
+  font-weight:300;
+  line-height:1.7;
+}
+
+/* ===== CTA ===== */
+.cta-section{
+  text-align:center;
+  padding:72px 24px;
+}
+.cta-section h2{
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(20px,2.8vw,28px);
+  color:#5a3e38;
+  margin-bottom:10px;
+  letter-spacing:1px;
+}
+.cta-section p{
+  font-size:14px;
+  color:rgba(130,100,90,.4);
+  margin-bottom:28px;
+  font-weight:300;
+}
+.cta-group{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.cta-btn{
+  padding:12px 40px;
+  border-radius:30px;
+  font-size:14px;
+  font-family:'Noto Sans SC',sans-serif;
+  cursor:pointer;
+  transition:all .4s;
+  letter-spacing:2px;
+  border:none;
+}
+.cta-btn.primary{
+  background:linear-gradient(135deg,#d48a7a,#c07a6a);
+  color:#fff;
+  box-shadow:0 4px 16px rgba(200,130,110,.15);
+}
+.cta-btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(200,130,110,.2);
+}
+.cta-btn.secondary{
+  background:transparent;
+  color:rgba(150,120,110,.5);
+  border:1px solid rgba(200,160,145,.15);
+}
+.cta-btn.secondary:hover{
+  border-color:rgba(200,160,145,.3);
+  color:#5a3e38;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  text-align:center;
+  padding:32px 24px;
+  font-size:12px;
+  color:rgba(200,160,145,.2);
+  font-weight:300;
+  letter-spacing:1px;
+}
+.footer .sep{display:inline-block;margin:0 8px;color:rgba(200,160,145,.1)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .section{padding:48px 16px}
+  .price-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .price-card{padding:22px 12px}
+  .rules-wrap{padding:24px 16px}
+  .respect-card{padding:36px 24px;border-radius:18px}
+  .process-steps{grid-template-columns:1fr 1fr;gap:10px}
+}
+@media(max-width:400px){
+  .price-grid{grid-template-columns:1fr}
+  .rules-list li{padding-left:32px}
+  .rules-list li::before{width:20px;height:20px;font-size:10px;top:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-card">
+    <div class="lock-icon">☾</div>
+    <h2>明心沟通</h2>
+    <p class="lock-sub">请输入访问密码</p>
+    <input type="password" id="lockInput" placeholder="● ● ● ●" onkeydown="if(event.key==='Enter')checkLock()" maxlength="20">
+    <button onclick="checkLock()">进入</button>
+    <div class="lock-error" id="lockError"></div>
+    <div class="lock-hint">请联系咨询师获取密码</div>
+  </div>
+</div>
+
+<div class="glow-bg">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<div class="content" id="mainContent" style="display:none">
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-embrace"></div>
+  <div class="brand-name">明心沟通</div>
+  <div class="brand-sub">一 对 一 咨 询</div>
+  <div class="hero-title">在坦诚对话中，<em>听见</em>内心的声音</div>
+  <p class="hero-desc">
+    每位咨询师都有不同的风格。<br>
+    在尊重与理解中，为你带来有温度的回响。
+  </p>
+  <div class="hero-tags">
+    <span>✦ 深度对话</span>
+    <span>✦ 尊重 · 保密</span>
+    <span>✦ 按需付费</span>
+    <span>✦ 坦诚相待</span>
+  </div>
+  <div class="scroll-down">
+    <span class="arrow">⌄</span>
+    <span>向下</span>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="section">
+  <div class="section-header">
+    <div class="icon">☾</div>
+    <h2>咨询费用</h2>
+    <div class="line"></div>
+    <p>选择适合你的方式，按需付费</p>
+  </div>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-name">单问</div>
+      <div class="price-amount">89 <span class="unit">元</span></div>
+      <div class="price-desc">一个问题 · 图返+长回答</div>
+    </div>
+    <div class="price-card">
+      <div class="price-name">五问打包</div>
+      <div class="price-amount">421 <span class="unit">元</span></div>
+      <div class="price-desc">五个问题，比单问省24</div>
+    </div>
+    <div class="price-card">
+      <div class="price-name">时问不限</div>
+      <div class="price-amount">368 <span class="unit">元</span></div>
+      <div class="price-desc">一小时 · 问题数量不限</div>
+    </div>
+    <div class="price-card">
+      <div class="price-name">下午包场</div>
+      <div class="price-amount">2200 <span class="unit">元</span></div>
+      <div class="price-desc">四小时 · 深度沉浸</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RULES ===== -->
+<section class="section" style="padding-top:0">
+  <div class="section-header">
+    <div class="icon">☾</div>
+    <h2>咨询约定</h2>
+    <div class="line"></div>
+    <p>本着相互尊重的原则，请阅读以下内容，确认同意后再开始咨询</p>
+  </div>
+  <div class="rules-wrap">
+    <div class="rules-intro">每位咨询师有不同的风格，本着相互尊重的原则，请阅读以下内容，确认同意后再开始：</div>
+    <ul class="rules-list">
+      <li><strong>未成年请退场</strong>，好好学习，天天向上。争做新时代好青年。</li>
+      <li><strong>先付款后咨询</strong>，预约时间可先付定金，毁约定金不退，定金普遍优惠价10，但会随毁约次数的上升而增多，最高升至咨询费的50％，毁约达三次后不向该客户提供预约咨询服务。</li>
+      <li>咨询前先将问题汇总，咨询师阅览同意后才可开始，如有特殊情况咨询师会和客户沟通修改问题，双方同意后开始咨询，如若客户执意该系列问题，咨询师将<strong>全额退费</strong>取消该次咨询（定金除外）。</li>
+      <li>每次咨询结束后，获赠一次<strong>售后服务</strong>，不抽牌只回顾梳理，时间五分钟以上半小时以内。请注意，咨询时为单人对接模式，售后服务则可能出现多人售后的情况。</li>
+      <li>售后若有优质回馈，将反馈给客户<strong>现金5元</strong>或<strong>95折优惠券</strong>，二者可任选其一。</li>
+      <li>介绍新客户，若咨询成交后，<strong>新旧客户均可获得8元优惠券</strong>。请注意，为提高客户体验，此条修改为新客户首次咨询即可享受8元优惠，而旧客户在新客户首单成交后即可使用优惠。</li>
+      <li>咨询师所承认的<strong>优惠券不设时效</strong>，此条作为回馈内容。</li>
+      <li>双方确认许可后，咨询展开，若中途有特殊情况中断，原因在咨询师，则<strong>退90％</strong>咨询费用；反之，原因在客户，则咨询终止不做退费处理。此条若有严重纠纷，客户强烈不配合的情况，超过两次即进入咨询黑名单，请客户找寻新的咨询师。</li>
+      <li>每个问题以<strong>图返及长回答</strong>作为结束，后续回复仅为咨询师酌情疏解客户情绪，时间不定，请不要因为某次的好心就定义成应尽的义务。</li>
+      <li style="color:rgba(200,160,145,.25)">敬请期待……</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== RESPECT ===== -->
+<section class="respect-section">
+  <div class="respect-card">
+    <span class="quote-mark top">"</span>
+    <span class="quote-mark bottom">"</span>
+    <p>
+      感谢您阅读完以上所有内容，请不要有所顾虑，<br>
+      双方带着<strong>尊重</strong>在此相会。<br><br>
+      即使您有别的准备，咨询师也非常理解。<br>
+      所以，<strong>无论您接受或取消此次咨询，<br>
+      都请以自身感受为主</strong>，愿您生活愉快！
+    </p>
+    <div class="sig">—— 明心沟通 · 以诚相见 ——</div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="section" style="padding-top:0">
+  <div class="section-header">
+    <div class="icon">☾</div>
+    <h2>咨询流程</h2>
+    <div class="line"></div>
+    <p>简单四步，开启你的咨询体验</p>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">一</div>
+      <h3>选择方案</h3>
+      <p>根据需求选择单问、打包或包场</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">二</div>
+      <h3>汇总问题</h3>
+      <p>提前整理问题，发送给咨询师审阅</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">三</div>
+      <h3>确认开始</h3>
+      <p>双方确认同意后付款，展开咨询</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">四</div>
+      <h3>售后梳理</h3>
+      <p>获赠回顾梳理服务，感受内心的回响</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <h2>准备好开始了吗？</h2>
+  <p>无论你带着什么问题而来，都请以自身感受为主，随心而行。</p>
+  <div class="cta-group">
+    <button class="cta-btn primary" onclick="alert('请联系咨询师预约')">预约咨询</button>
+    <button class="cta-btn secondary" onclick="alert('如需了解详情，欢迎咨询')">了解更多</button>
+  </div>
+</section>
+
+<footer class="footer">
+  <span>明心沟通</span>
+  <span class="sep">·</span>
+  <span>以诚相见</span>
+  <span class="sep">·</span>
+  <span>个人咨询服务</span>
+</footer>
+
+</div>
+
+<script>
+// ===== 修改这个密码 =====
+const SITE_PASSWORD = '8888';
+
+function checkLock() {
+  const input = document.getElementById('lockInput');
+  const error = document.getElementById('lockError');
+  if (input.value === SITE_PASSWORD) {
+    document.getElementById('lockScreen').classList.add('unlocked');
+    document.getElementById('mainContent').style.display = '';
+  } else {
+    error.textContent = '密码错误，请重试';
+    input.value = '';
+    input.focus();
+  }
+}
+</script>
+
+</body>
+</html>
