@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>明心沟通 · 宣传图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Noto Sans SC',sans-serif;
+  background:#fdf6f0;
+  color:#4a3a35;
+  line-height:1.8;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.poster{
+  max-width:600px;
+  margin:0 auto;
+  background:#fdf6f0;
+  padding:0;
+}
+.header{
+  text-align:center;
+  padding:60px 32px 40px;
+  position:relative;
+  background:linear-gradient(180deg,rgba(255,220,200,.15),transparent);
+}
+.header .brand{
+  font-family:'Noto Serif SC',serif;
+  font-size:42px;
+  font-weight:700;
+  color:#d48a7a;
+  letter-spacing:6px;
+  margin-bottom:2px;
+}
+.header .sub{
+  font-size:14px;
+  color:rgba(180,130,120,.3);
+  letter-spacing:10px;
+  font-weight:300;
+  margin-bottom:16px;
+}
+.header .line{
+  width:50px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(200,160,145,.2),transparent);
+  margin:0 auto;
+}
+.header .slogan{
+  font-family:'Noto Serif SC',serif;
+  font-size:18px;
+  color:#6a4a42;
+  font-weight:400;
+  margin-top:16px;
+}
+.header .slogan em{
+  font-style:normal;
+  color:#d48a7a;
+}
+.header .tags{
+  margin-top:14px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+}
+.header .tags span{
+  font-size:12px;
+  color:rgba(150,120,110,.5);
+  letter-spacing:2px;
+}
+.section{
+  padding:32px 32px;
+}
+.section-title{
+  text-align:center;
+  margin-bottom:20px;
+}
+.section-title h2{
+  font-family:'Noto Serif SC',serif;
+  font-size:20px;
+  color:#6a4a42;
+  font-weight:600;
+  letter-spacing:3px;
+}
+.section-title .line{
+  width:36px;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(200,160,145,.2),transparent);
+  margin:8px auto 0;
+}
+.price-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.price-card{
+  background:rgba(255,255,255,.5);
+  border:1px solid rgba(200,160,145,.08);
+  border-radius:12px;
+  padding:20px 14px;
+  text-align:center;
+}
+.price-name{
+  font-size:12px;
+  color:rgba(150,120,110,.4);
+  letter-spacing:3px;
+  margin-bottom:6px;
+  font-weight:300;
+}
+.price-num{
+  font-family:'Noto Serif SC',serif;
+  font-size:28px;
+  font-weight:700;
+  color:#6a4a42;
+  line-height:1;
+}
+.price-num .u{font-size:13px;font-weight:400;color:rgba(150,120,110,.3)}
+.price-desc{
+  font-size:12px;
+  color:rgba(130,100,90,.35);
+  margin-top:6px;
+  font-weight:300;
+}
+.rules-box{
+  background:rgba(255,255,255,.3);
+  border:1px solid rgba(200,160,145,.06);
+  border-radius:12px;
+  padding:24px 20px;
+}
+.rules-box ol{
+  list-style:none;
+  counter-reset:r;
+}
+.rules-box ol li{
+  counter-increment:r;
+  padding:8px 0 8px 32px;
+  position:relative;
+  font-size:13px;
+  color:rgba(80,65,60,.75);
+  line-height:1.9;
+  border-bottom:1px solid rgba(200,160,145,.04);
+}
+.rules-box ol li:last-child{border-bottom:none}
+.rules-box ol li::before{
+  content:counter(r);
+  position:absolute;
+  left:0;top:8px;
+  width:22px;height:22px;
+  border-radius:50%;
+  border:1px solid rgba(200,160,145,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:rgba(180,140,130,.3);font-weight:400;
+}
+.rules-box ol li strong{color:#d48a7a;font-weight:600}
+.quote-box{
+  text-align:center;
+  padding:32px 32px 40px;
+}
+.quote-box .qm{
+  font-family:'Noto Serif SC',serif;
+  font-size:40px;
+  color:rgba(200,160,145,.08);
+  line-height:1;
+}
+.quote-box p{
+  font-size:16px;
+  color:#5a3e38;
+  line-height:2.2;
+  padding:0 16px;
+}
+.quote-box p strong{color:#d48a7a;font-weight:600}
+.quote-box .from{
+  margin-top:12px;
+  font-size:13px;
+  color:rgba(180,140,130,.3);
+  letter-spacing:2px;
+}
+.process-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.proc{
+  text-align:center;
+  padding:16px 8px;
+}
+.proc .n{
+  width:32px;height:32px;
+  border-radius:50%;
+  border:1px solid rgba(200,160,145,.1);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 8px;
+  font-size:14px;color:rgba(180,140,130,.35);
+}
+.proc h4{font-size:14px;color:#6a4a42;font-weight:500;margin-bottom:2px}
+.proc p{font-size:12px;color:rgba(130,100,90,.4);font-weight:300}
+.footer{
+  text-align:center;
+  padding:24px 32px 36px;
+}
+.footer p{
+  font-size:12px;
+  color:rgba(200,160,145,.15);
+  font-weight:300;
+  letter-spacing:1px;
+}
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <div class="header">
+    <div class="brand">明心沟通</div>
+    <div class="sub">一 对 一 咨 询</div>
+    <div class="line"></div>
+    <div class="slogan">在坦诚对话中，<em>听见</em>内心的声音</div>
+    <div class="tags">
+      <span>✦ 深度对话</span>
+      <span>✦ 尊重 · 保密</span>
+      <span>✦ 按需付费</span>
+      <span>✦ 坦诚相待</span>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-title">
+      <h2>咨询费用</h2>
+      <div class="line"></div>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-name">单问</div>
+        <div class="price-num">89 <span class="u">元</span></div>
+        <div class="price-desc">一个问题·图返+长回答</div>
+      </div>
+      <div class="price-card">
+        <div class="price-name">五问打包</div>
+        <div class="price-num">421 <span class="u">元</span></div>
+        <div class="price-desc">五个问题，省24</div>
+      </div>
+      <div class="price-card">
+        <div class="price-name">时问不限</div>
+        <div class="price-num">368 <span class="u">元</span></div>
+        <div class="price-desc">一小时·问题数量不限</div>
+      </div>
+      <div class="price-card">
+        <div class="price-name">下午包场</div>
+        <div class="price-num">2200 <span class="u">元</span></div>
+        <div class="price-desc">四小时·深度沉浸</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-title">
+      <h2>咨询约定</h2>
+      <div class="line"></div>
+    </div>
+    <div class="rules-box">
+      <ol>
+        <li><strong>未成年请退场</strong>，好好学习，天天向上。争做新时代好青年。</li>
+        <li><strong>先付款后咨询</strong>，预约时间可先付定金，毁约定金不退，<strong>定金为此次咨询费用的20％</strong>，毁约达三次后不向该客户提供预约咨询服务。</li>
+        <li>咨询前先将问题汇总，咨询师阅览同意后才可开始，如有特殊情况咨询师会和客户沟通修改问题，双方同意后开始咨询，如若客户执意该系列问题，咨询师将<strong>全额退费</strong>取消该次咨询（<strong>因属客户原因，定金不退</strong>）。</li>
+        <li>每次咨询结束后，获赠一次<strong>售后服务</strong>，不抽牌只回顾梳理，时间五分钟以上半小时以内。请注意，咨询时为单人对接模式，售后服务则可能出现多人售后的情况。</li>
+        <li>售后若有优质回馈，将反馈给客户<strong>现金（价值为此次咨询费用的20％）</strong>或<strong>七五折优惠券</strong>，二者可任选其一。</li>
+        <li>介绍新客户，咨询成交后，新旧客户均可获得<strong>七五折优惠券</strong>。新客户首次咨询即可享受，旧客户在新客户首单成交后即可使用，或可选择现金小礼包（新客户咨询费的20％）。<strong>引流款服务（限时限次尝鲜价）不参与此项优惠。</strong></li>
+        <li>咨询师所承认的<strong>优惠券不设时效</strong>，此条作为回馈内容。每张优惠券每次咨询只可使用一张，不能叠加，不得转送。</li>
+        <li>双方确认许可后，咨询展开，若中途有特殊情况中断，原因在咨询师，则<strong>退90％</strong>咨询费用；反之，原因在客户，则咨询终止不做退费处理。此条若有严重纠纷，客户强烈不配合的情况，超过两次即进入咨询黑名单，请客户找寻新的咨询师。</li>
+        <li>每个问题以<strong>图返及长回答</strong>作为结束，后续回复仅为咨询师酌情疏解客户情绪，时间不定，请不要因为某次的好心就定义成应尽的义务。</li>
+        <li><strong>咨询内容双方均需保密</strong>，咨询师不得将客户问题及回答用于任何公开场合，客户亦不得私自传播咨询内容。经双方沟通确认后，咨询内容可用于宣传与推广。</li>
+        <li><strong>客户预约迟到超过15分钟，迟到时间计入已使用时长。</strong></li>
+        <li>同一客户<strong>第二次咨询起</strong>，可享受当次咨询费<strong>95折优惠</strong>。每月最多使用2次，优惠期限为首次咨询后6个月内。</li>
+        <li style="color:rgba(200,160,145,.2)">敬请期待……</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    <div class="qm">"</div>
+    <p>
+      感谢您阅读完以上内容，请不要有所顾虑，<br>
+      双方带着<strong>尊重</strong>在此相会。<br><br>
+      无论您接受或取消此次咨询，<br>
+      都请以<strong>自身感受为主</strong>，愿您生活愉快！
+    </p>
+    <div class="from">—— 明心沟通 · 以诚相见 ——</div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-title">
+      <h2>咨询流程</h2>
+      <div class="line"></div>
+    </div>
+    <div class="process-grid">
+      <div class="proc"><div class="n">一</div><h4>选择方案</h4><p>根据需求选择单问、打包或包场</p></div>
+      <div class="proc"><div class="n">二</div><h4>汇总问题</h4><p>提前整理问题，发送给咨询师审阅</p></div>
+      <div class="proc"><div class="n">三</div><h4>确认开始</h4><p>双方确认同意后付款，展开咨询</p></div>
+      <div class="proc"><div class="n">四</div><h4>售后梳理</h4><p>获赠回顾梳理服务，感受回响</p></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>明心沟通 · 个人咨询服务</p>
+  </div>
+
+</div>
+</body>
+</html>
