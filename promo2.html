@@ -459,6 +459,159 @@ body{
 }
 .footer .sep{display:inline-block;margin:0 8px;color:rgba(200,160,145,.1)}
 
+/* ===== RULE GROUPS ===== */
+.rule-group{margin-top:20px}
+.rule-group:first-child{margin-top:0}
+.rule-group-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:15px;
+  color:#d48a7a;
+  font-weight:600;
+  letter-spacing:2px;
+  margin-bottom:8px;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(200,160,145,.1);
+}
+
+/* ===== SERVICE ENTRY ===== */
+.services-entry{
+  max-width:860px;
+  margin:0 auto;
+  padding:0 24px 48px;
+}
+.service-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.service-card{
+  background:rgba(255,255,255,.45);
+  border:1px solid rgba(200,160,145,.08);
+  border-radius:16px;
+  padding:28px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .4s ease;
+}
+.service-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(200,160,145,.18);
+  background:rgba(255,255,255,.6);
+  box-shadow:0 6px 20px rgba(200,160,145,.06);
+}
+.service-card .s-icon{font-size:30px;opacity:.5;margin-bottom:8px}
+.service-card h3{
+  font-family:'Noto Serif SC',serif;
+  font-size:18px;
+  color:#6a4a42;
+  font-weight:600;
+  letter-spacing:2px;
+  margin-bottom:4px;
+}
+.service-card .s-desc{
+  font-size:13px;
+  color:rgba(130,100,90,.4);
+  font-weight:300;
+  line-height:1.7;
+}
+.service-card .s-more{
+  display:inline-block;
+  margin-top:12px;
+  font-size:12px;
+  color:#d48a7a;
+  letter-spacing:2px;
+}
+
+/* ===== SUB VIEW ===== */
+.view{position:relative;z-index:1;min-height:100vh;display:none}
+.back-bar{
+  padding:24px 24px 0;
+  max-width:860px;
+  margin:0 auto;
+}
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  color:rgba(150,120,110,.5);
+  cursor:pointer;
+  transition:color .3s;
+  font-family:'Noto Sans SC',sans-serif;
+  background:none;
+  border:none;
+  letter-spacing:1px;
+}
+.back-btn:hover{color:#6a4a42}
+
+/* ===== SPREAD LIST ===== */
+.spread-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+}
+.spread-item{
+  background:rgba(255,255,255,.45);
+  border:1px solid rgba(200,160,145,.08);
+  border-radius:14px;
+  padding:22px 14px;
+  text-align:center;
+  transition:all .4s ease;
+}
+.spread-item:hover{
+  transform:translateY(-3px);
+  border-color:rgba(200,160,145,.18);
+}
+.spread-name{
+  font-size:14px;
+  color:#6a4a42;
+  font-weight:500;
+  letter-spacing:1px;
+  margin-bottom:2px;
+}
+.spread-cards{
+  font-size:12px;
+  color:rgba(150,120,110,.4);
+  font-weight:300;
+  margin-bottom:8px;
+}
+.spread-price{
+  font-family:'Noto Serif SC',serif;
+  font-size:22px;
+  font-weight:700;
+  color:#d48a7a;
+}
+.spread-price .u{font-size:12px;font-weight:400;color:rgba(150,120,110,.35)}
+
+/* ===== QINGXU ===== */
+.qingxu-rate{
+  text-align:center;
+  padding:24px 20px;
+  background:rgba(255,255,255,.45);
+  border:1px solid rgba(200,160,145,.08);
+  border-radius:16px;
+  margin-bottom:16px;
+}
+.qingxu-rate .big{
+  font-family:'Noto Serif SC',serif;
+  font-size:42px;
+  font-weight:700;
+  color:#d48a7a;
+  line-height:1;
+}
+.qingxu-rate .big .u{font-size:16px;font-weight:400;color:rgba(150,120,110,.4)}
+.qingxu-rate .sub{font-size:13px;color:rgba(130,100,90,.4);font-weight:300;margin-top:8px}
+.note-box{
+  background:rgba(255,255,255,.3);
+  border:1px solid rgba(200,160,145,.06);
+  border-radius:14px;
+  padding:20px;
+  font-size:13px;
+  color:rgba(100,80,70,.65);
+  line-height:2;
+}
+.note-box strong{color:#d48a7a;font-weight:600}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:600px){
   .section{padding:48px 16px}
@@ -467,11 +620,14 @@ body{
   .rules-wrap{padding:24px 16px}
   .respect-card{padding:36px 24px;border-radius:18px}
   .process-steps{grid-template-columns:1fr 1fr;gap:10px}
+  .service-cards{grid-template-columns:1fr}
+  .spread-list{grid-template-columns:1fr 1fr;gap:10px}
 }
 @media(max-width:400px){
   .price-grid{grid-template-columns:1fr}
   .rules-list li{padding-left:32px}
   .rules-list li::before{width:20px;height:20px;font-size:10px;top:12px}
+  .spread-list{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -561,21 +717,58 @@ body{
   </div>
   <div class="rules-wrap">
     <div class="rules-intro">每位咨询师有不同的风格，本着相互尊重的原则，请阅读以下内容，确认同意后再开始：</div>
-    <ul class="rules-list">
-      <li><strong>未成年请退场</strong>，好好学习，天天向上。争做新时代好青年。</li>
-      <li><strong>先付款后咨询</strong>，预约时间可先付定金，毁约定金不退，<strong>定金为此次咨询费用的20％</strong>，毁约达三次后不向该客户提供预约咨询服务。</li>
-      <li>咨询前先将问题汇总，咨询师阅览同意后才可开始，如有特殊情况咨询师会和客户沟通修改问题，双方同意后开始咨询，如若客户执意该系列问题，咨询师将<strong>全额退费</strong>取消该次咨询（<strong>因属客户原因，定金不退</strong>）。</li>
-      <li>每次咨询结束后，获赠一次<strong>售后服务</strong>，不抽牌只回顾梳理，时间五分钟以上半小时以内。请注意，咨询时为单人对接模式，售后服务则可能出现多人售后的情况。</li>
-      <li>售后若有优质回馈，将反馈给客户<strong>现金（价值为此次咨询费用的20％）</strong>或<strong>七五折优惠券</strong>，二者可任选其一。</li>
-      <li>介绍新客户，咨询成交后，新旧客户均可获得<strong>七五折优惠券</strong>。新客户首次咨询即可享受，旧客户在新客户首单成交后即可使用，或可选择现金小礼包（新客户咨询费的20％）。<strong>引流款服务（限时限次尝鲜价）不参与此项优惠。</strong></li>
-      <li>咨询师所承认的<strong>优惠券不设时效</strong>，此条作为回馈内容。每张优惠券每次咨询只可使用一张，不能叠加，不得转送。</li>
-      <li>双方确认许可后，咨询展开，若中途有特殊情况中断，原因在咨询师，则<strong>退90％</strong>咨询费用；反之，原因在客户，则咨询终止不做退费处理。此条若有严重纠纷，客户强烈不配合的情况，超过两次即进入咨询黑名单，请客户找寻新的咨询师。</li>
-      <li>每个问题以<strong>图返及长回答</strong>作为结束，后续回复仅为咨询师酌情疏解客户情绪，时间不定，请不要因为某次的好心就定义成应尽的义务。</li>
-      <li><strong>咨询内容双方均需保密</strong>，咨询师不得将客户问题及回答用于任何公开场合，客户亦不得私自传播咨询内容。经双方沟通确认后，咨询内容可用于宣传与推广。</li>
-      <li><strong>客户预约迟到超过15分钟，迟到时间计入已使用时长。</strong></li>
-      <li>同一客户<strong>第二次咨询起</strong>，可享受当次咨询费<strong>95折优惠</strong>。每月最多使用2次，优惠期限为首次咨询后6个月内。</li>
-      <li style="color:rgba(200,160,145,.25)">敬请期待……</li>
-    </ul>
+
+    <div class="rule-group">
+      <div class="rule-group-title">基本约定</div>
+      <ul class="rules-list">
+        <li><strong>未成年请退场</strong>，好好学习，天天向上。争做新时代好青年。</li>
+      </ul>
+    </div>
+
+    <div class="rule-group">
+      <div class="rule-group-title">付款与定金</div>
+      <ul class="rules-list">
+        <li><strong>先付款后咨询</strong>，预约时间可先付定金，毁约定金不退，<strong>定金为此次咨询费用的20％</strong>，毁约达三次后不向该客户提供预约咨询服务。</li>
+      </ul>
+    </div>
+
+    <div class="rule-group">
+      <div class="rule-group-title">咨询流程</div>
+      <ul class="rules-list">
+        <li>咨询前先将问题汇总，咨询师阅览同意后才可开始，如有特殊情况咨询师会和客户沟通修改问题，双方同意后开始咨询。</li>
+        <li><strong>客户预约迟到超过15分钟，迟到时间计入已使用时长。</strong></li>
+        <li>每个问题以<strong>图返及长回答</strong>作为结束，咨询师进行图返及长回答时<strong>请勿打断</strong>。后续互动回复时间约为<strong>十分钟左右</strong>，如遇特殊情况可能稍作延长。后续回复仅为咨询师酌情疏解客户情绪，请不要因某次的好心就定义成应尽的义务。</li>
+      </ul>
+    </div>
+
+    <div class="rule-group">
+      <div class="rule-group-title">退费规则</div>
+      <ul class="rules-list">
+        <li>咨询前，如若客户执意该系列问题，咨询师将<strong>全额退费</strong>取消该次咨询（<strong>因属客户原因，定金不退</strong>）。</li>
+        <li>咨询中，双方确认许可后咨询展开，若中途有特殊情况中断，原因在咨询师，则<strong>退90％</strong>咨询费用；反之，原因在客户，则咨询终止不做退费处理。此条若有严重纠纷，客户强烈不配合的情况，超过两次即进入咨询黑名单，请客户找寻新的咨询师。</li>
+        <li>咨询结束后，服务即视为交付完成，原则上<strong>不予退费</strong>。如客户对服务有异议，可在咨询结束后<strong>3日内</strong>提出，双方友好协商解决。</li>
+      </ul>
+    </div>
+
+    <div class="rule-group">
+      <div class="rule-group-title">优惠与回馈</div>
+      <ul class="rules-list">
+        <li>每次咨询结束后，获赠一次<strong>售后服务</strong>，不抽牌只回顾梳理，时间五分钟以上半小时以内。请注意，咨询时为单人对接模式，售后服务则可能出现多人售后的情况。</li>
+        <li>售后若有优质回馈，将反馈给客户<strong>现金（价值为此次咨询费用的20％）</strong>或<strong>七五折优惠券</strong>，二者可任选其一。</li>
+        <li>介绍新客户，咨询成交后，新旧客户均可获得<strong>七五折优惠券</strong>。新客户首次咨询即可享受，旧客户在新客户首单成交后即可使用，或可选择现金小礼包（新客户咨询费的20％）。<strong>引流款服务（限时限次尝鲜价）不参与此项优惠。</strong></li>
+        <li>咨询师所承认的<strong>优惠券不设时效</strong>，此条作为回馈内容。每张优惠券每次咨询只可使用一张，不能叠加，不得转送。</li>
+        <li>同一客户<strong>第二次咨询起</strong>，可享受当次咨询费<strong>95折优惠</strong>。每月最多使用2次，优惠期限为首次咨询后6个月内。</li>
+      </ul>
+    </div>
+
+    <div class="rule-group">
+      <div class="rule-group-title">隐私与保密</div>
+      <ul class="rules-list">
+        <li><strong>咨询内容双方均需保密</strong>，咨询师不得将客户问题及回答用于任何公开场合，客户亦不得私自传播咨询内容。经双方沟通确认后，咨询内容可用于宣传与推广。</li>
+      </ul>
+    </div>
+
+    <div style="text-align:center;padding-top:16px;color:rgba(200,160,145,.25);font-size:13px">敬请期待……</div>
   </div>
 </section>
 
@@ -627,6 +820,30 @@ body{
   </div>
 </section>
 
+<!-- ===== SERVICES ===== -->
+<section class="section" style="padding-top:0">
+  <div class="section-header">
+    <div class="icon">☾</div>
+    <h2>更多服务</h2>
+    <div class="line"></div>
+    <p>除了常规咨询，这里还有两种特别的方式</p>
+  </div>
+  <div class="service-cards">
+    <div class="service-card" onclick="showView('paizhenView')">
+      <div class="s-icon">✦</div>
+      <h3>牌阵</h3>
+      <p class="s-desc">多种牌阵，深度解读<br>为你带来更丰富的视角</p>
+      <span class="s-more">查看详情 →</span>
+    </div>
+    <div class="service-card" onclick="showView('qingxuView')">
+      <div class="s-icon">☁</div>
+      <h3>情绪梳理</h3>
+      <p class="s-desc">不抽牌，只是倾听与陪伴<br>为你的情绪找个出口</p>
+      <span class="s-more">查看详情 →</span>
+    </div>
+  </div>
+</section>
+
 <!-- ===== CTA ===== -->
 <section class="cta-section">
   <h2>准备好开始了吗？</h2>
@@ -647,6 +864,178 @@ body{
 
 </div>
 
+<!-- ===== PAIZHEN VIEW ===== -->
+<div class="view" id="paizhenView">
+  <div class="back-bar">
+    <button class="back-btn" onclick="showView('mainContent')">← 返回首页</button>
+  </div>
+
+  <section class="hero" style="min-height:auto;padding:60px 24px 48px">
+    <div class="hero-embrace"></div>
+    <div class="brand-name" style="font-size:clamp(32px,5vw,48px)">牌阵</div>
+    <div class="brand-sub">塔 罗 牌 阵 · 深 度 解 读</div>
+    <p class="hero-desc" style="margin-bottom:0">
+      部分牌阵为咨询师自行研习改编，<br>
+      牌数及解读角度依实际情况灵活调整。
+    </p>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header">
+      <div class="icon">✦</div>
+      <h2>牌阵类型</h2>
+      <div class="line"></div>
+      <p>未列出的牌阵可联系咨询师单独确认收费</p>
+    </div>
+    <div class="spread-list">
+      <div class="spread-item">
+        <div class="spread-name">爱情金字塔</div>
+        <div class="spread-cards">7 张牌</div>
+        <div class="spread-price">256 <span class="u">元</span></div>
+      </div>
+      <div class="spread-item">
+        <div class="spread-name">二选一</div>
+        <div class="spread-cards">6 张牌</div>
+        <div class="spread-price">188 <span class="u">元</span></div>
+      </div>
+      <div class="spread-item">
+        <div class="spread-name">凯尔特十字</div>
+        <div class="spread-cards">10 张牌</div>
+        <div class="spread-price">398 <span class="u">元</span></div>
+      </div>
+      <div class="spread-item">
+        <div class="spread-name">钻石展开</div>
+        <div class="spread-cards">5 张牌</div>
+        <div class="spread-price">128 <span class="u">元</span></div>
+      </div>
+      <div class="spread-item">
+        <div class="spread-name">四季牌阵</div>
+        <div class="spread-cards">8 张牌</div>
+        <div class="spread-price">378 <span class="u">元</span></div>
+      </div>
+      <div class="spread-item">
+        <div class="spread-name">事业工作流</div>
+        <div class="spread-cards">7 张牌</div>
+        <div class="spread-price">256 <span class="u">元</span></div>
+      </div>
+      <div class="spread-item">
+        <div class="spread-name">人生课题</div>
+        <div class="spread-cards">22 张牌起</div>
+        <div class="spread-price">660 <span class="u">元</span></div>
+      </div>
+      <div class="spread-item">
+        <div class="spread-name">传讯（心语传递）</div>
+        <div class="spread-cards">12 张牌起</div>
+        <div class="spread-price">521 <span class="u">元</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>想了解更多牌阵？</h2>
+    <p>欢迎联系咨询师，获取更多牌阵介绍与收费详情。</p>
+    <div class="cta-group">
+      <button class="cta-btn primary" onclick="alert('请联系咨询师预约')">预约咨询</button>
+      <button class="cta-btn secondary" onclick="showView('mainContent')">返回首页</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>明心沟通</span>
+    <span class="sep">·</span>
+    <span>以诚相见</span>
+    <span class="sep">·</span>
+    <span>个人咨询服务</span>
+  </footer>
+</div>
+
+<!-- ===== QINGXU VIEW ===== -->
+<div class="view" id="qingxuView">
+  <div class="back-bar">
+    <button class="back-btn" onclick="showView('mainContent')">← 返回首页</button>
+  </div>
+
+  <section class="hero" style="min-height:auto;padding:60px 24px 48px">
+    <div class="hero-embrace"></div>
+    <div class="brand-name" style="font-size:clamp(32px,5vw,48px)">情绪梳理</div>
+    <div class="brand-sub">倾 听 · 陪 伴 · 找 个 出 口</div>
+    <p class="hero-desc" style="margin-bottom:0">
+      不抽牌，不分析，<br>
+      只是安静地听你说，陪你梳理情绪。
+    </p>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header">
+      <div class="icon">☁</div>
+      <h2>服务方式</h2>
+      <div class="line"></div>
+      <p>当情绪需要一个出口，这里为你留一盏灯</p>
+    </div>
+    <div class="qingxu-rate">
+      <div class="big">6 <span class="u">元 / 分钟</span></div>
+      <div class="sub">30 分钟起步 · 单次上限 2 小时</div>
+    </div>
+    <div class="note-box">
+      <strong>温馨提示：</strong>本服务为<strong>情绪陪伴与倾听倾诉</strong>，非心理咨询、心理治疗。如您正处于危机状态或有自伤风险，请及时寻求专业心理援助。
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-header">
+      <div class="icon">☾</div>
+      <h2>服务约定</h2>
+      <div class="line"></div>
+      <p>开始前请阅读以下内容，确认同意后再开始</p>
+    </div>
+    <div class="rules-wrap">
+      <div class="rule-group">
+        <div class="rule-group-title">时长与计费</div>
+        <ul class="rules-list">
+          <li>服务以预约时长为基准，<strong>30分钟起步，单次上限2小时</strong>。接近时长上限时，咨询师将提醒客户是否继续。客户选择继续的，超出部分按6元/分钟计费，服务结束后结算；客户未回应或拒绝的，服务在提醒时点结束，按预约时长计费。</li>
+          <li>预约时长结束后，客户仍希望继续倾诉的，可另行预约，费用按当时实际时长累计。</li>
+          <li>因<strong>客户方原因</strong>导致服务中断的，已使用时长照常计费，不做退费。</li>
+        </ul>
+      </div>
+
+      <div class="rule-group">
+        <div class="rule-group-title">内容边界</div>
+        <ul class="rules-list">
+          <li>服务内容仅限<strong>情绪倾诉与陪伴</strong>，不涉及违法、危险或其他越界内容。</li>
+          <li>客户若出现<strong>辱骂、骚扰、人身攻击、性骚扰</strong>等行为，咨询师有权立即终止服务，且<strong>不予退费</strong>。</li>
+          <li>同一客户累计骚扰行为达<strong>2次</strong>，将列入服务黑名单，不再接待。</li>
+          <li><strong>未成年人</strong>使用本服务，需经监护人知情同意。</li>
+        </ul>
+      </div>
+
+      <div class="rule-group">
+        <div class="rule-group-title">其他说明</div>
+        <ul class="rules-list">
+          <li>服务过程中，双方均应保持尊重与友善。咨询师尊重客户的每一种情绪，也请客户尊重咨询师的时间与感受。</li>
+          <li>如有未尽事宜，双方友好协商解决。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>需要找个人说说话吗？</h2>
+    <p>无论此刻你是什么感受，都欢迎来倾诉。</p>
+    <div class="cta-group">
+      <button class="cta-btn primary" onclick="alert('请联系咨询师预约')">预约倾诉</button>
+      <button class="cta-btn secondary" onclick="showView('mainContent')">返回首页</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>明心沟通</span>
+    <span class="sep">·</span>
+    <span>以诚相见</span>
+    <span class="sep">·</span>
+    <span>个人咨询服务</span>
+  </footer>
+</div>
+
 <script>
 // ===== 修改这个密码 =====
 const SITE_PASSWORD = '8888';
@@ -656,12 +1045,25 @@ function checkLock() {
   const error = document.getElementById('lockError');
   if (input.value === SITE_PASSWORD) {
     document.getElementById('lockScreen').classList.add('unlocked');
-    document.getElementById('mainContent').style.display = '';
+    showView('mainContent');
   } else {
     error.textContent = '密码错误，请重试';
     input.value = '';
     input.focus();
   }
+}
+
+let savedScrollPos = 0;
+
+function showView(id) {
+  const views = ['mainContent', 'paizhenView', 'qingxuView'];
+  if (id !== 'mainContent') {
+    savedScrollPos = window.scrollY;
+  }
+  views.forEach(v => {
+    document.getElementById(v).style.display = (v === id) ? 'block' : 'none';
+  });
+  window.scrollTo(0, id === 'mainContent' ? savedScrollPos : 0);
 }
 </script>
 
